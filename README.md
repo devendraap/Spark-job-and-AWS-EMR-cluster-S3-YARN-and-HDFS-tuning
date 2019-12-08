@@ -20,7 +20,7 @@ _Number of executor = (48 - 1) / 5 ~= 9 _
 
 | **Parameter** | **Value** | **Explanation** | **Benefits** | **Reference** |
 | --- | --- | --- | --- | --- |
-| spark.executor.memory | 33g |   |   | Section 1.4. Spark executor memory |
+| spark.executor.memory | 33g |   |   | Spark executor memory section below |
 | spark.executor.cores | 5 |   |   |   |
 | spark.memory.fraction | 0.8 | Approx. (spark.memory.fraction \* spark.executor.memory) memory for task execution, shuffle, join, sort, aggregate  |   |   |
 | spark.memory.storageFraction | 0.5 | Approx. (spark.memory.storageFraction \* spark.executor.memory) memory for cache, broadcast and accumulator |   |   |
