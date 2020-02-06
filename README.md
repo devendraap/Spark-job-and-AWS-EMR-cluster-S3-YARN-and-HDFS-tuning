@@ -420,14 +420,14 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | Usage | Enables S3 AES256 data encryption |
 | Reference | (blank) |
 
-| Configuration Properties | fs.s3a.threads.core |
+| Configuration Properties | fs.s3a. threads.core |
 | --- | --- |
 | Classification | emrfs-site |
 | Value | 250 |
 | Usage | Increases S3 IO speed |
 | Reference | [Link](https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html) |
 
-| Configuration Properties | yarn.log-aggregation.retain-seconds |
+| Configuration Properties | yarn.log-aggregation. retain-seconds |
 | --- | --- |
 | Classification | yarn-site |
 | Value | -1 |
@@ -448,42 +448,42 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | Usage | Increases time to wait until a node manager is considered dead |
 | Reference | (blank) |
 
-| Configuration Properties | yarn.nodemanager.pmem-check-enabled |
+| Configuration Properties | yarn.nodemanager. pmem-check-enabled |
 | --- | --- |
 | Classification | yarn-site |
 | Value | FALSE |
 | Usage | (Note: Re-partition data in job based on size) |
 | Reference | (blank) |
 
-| Configuration Properties | yarn.nodemanager.vmem-check-enabled |
+| Configuration Properties | yarn.nodemanager. vmem-check-enabled |
 | --- | --- |
 | Classification | yarn-site |
 | Value | FALSE |
 | Usage | To disable hard memory restriction causing OOM (out of memory) JVM error |
 | Reference | (blank) |
 
-| Configuration Properties | yarn.resourcemanager.decommissioning.timeout |
+| Configuration Properties | yarn.resourcemanager. decommissioning.timeout |
 | --- | --- |
 | Classification | yarn-site |
 | Value | 3600 |
 | Usage | Increases timeout interval to blacklist node |
 | Reference | (blank) |
 
-| Configuration Properties | yarn.scheduler.capacity.resource-calculator |
+| Configuration Properties | yarn.scheduler. capacity.resource-calculator |
 | --- | --- |
 | Classification | capacity-scheduler |
-| Value | org.apache.hadoop.yarn.util.resource.DominantResourceCalculator |
+| Value | org.apache.hadoop. yarn.util.resource. DominantResourceCalculator |
 | Usage | The default resource calculator i.e org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator uses only memory information for allocating containers and CPU scheduling is not enabled by default |
 | Reference | [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores) |
 
-| Configuration Properties | yarn.scheduler.capacity.root.default.capacity |
+| Configuration Properties | yarn.scheduler. capacity.root. default.capacity |
 | --- | --- |
 | Classification | capacity-scheduler |
 | Value | 100 |
 | Usage | Uses all resources of dedicated cluster |
 | Reference | (blank) |
 
-| Configuration Properties | yarn.scheduler.capacity.root.default.maximum-capacity |
+| Configuration Properties | yarn.scheduler. capacity.root. default.maximum-capacity |
 | --- | --- |
 | Classification | capacity-scheduler |
 | Value | 100 |
