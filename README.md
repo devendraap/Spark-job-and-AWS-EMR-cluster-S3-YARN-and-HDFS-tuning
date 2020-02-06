@@ -83,7 +83,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Parameter | spark.dynamicAllocation. enabled and |
 | --- | --- |
 | Value | TRUE |
-| Explanation | To allocate executor dynamically based on yarn.scheduler. capacity.resource- calculator = org.apache. hadoop.yarn. util.resource. DominantResourceCalculator |
+| Explanation | To allocate executor dynamically based on yarn.scheduler. capacity.resource- calculator = org.apache. hadoop.yarn. util.resource. DominantResource Calculator |
 | Benefits | Scales number of executors based on CPU and memory requirements. |
 | Reference | [Link](https://stackoverflow.com/questions/55925106/exceptions-while-running-spark-job-on-emr-cluster-java-io-ioexception-all-data/55925309#55925309) |
 
@@ -96,15 +96,15 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 
 | Parameter | spark.executor.extraJavaOptions |
 | --- | --- |
-| Value | -XX:+UseG1GC -XX: InitiatingHeapOccupancyPercent=35 -XX: OnOutOfMemoryError=&#39; kill -9 %p&#39; |
-| Explanation | The parameter -XX:+UseG1GC specifies that the G1GC garbage collector should be used. (The default is -XX: +UseParallelGC.) To understand the frequency and execution time of the garbage collection, use the parameters -verbose:gc -XX: +PrintGCDetails -XX: +PrintGCDateStamps. To initiate garbage collection sooner, set InitiatingHeapOccupancyPercent to 35 (the default is 0.45). Doing this helps avoid potential garbage collection for the total memory, which can take a significant amount of time. |
+| Value | -XX:+UseG1GC -XX: InitiatingHeapOccupancy Percent=35 -XX: OnOutOfMemoryError=&#39; kill -9 %p&#39; |
+| Explanation | The parameter -XX:+UseG1GC specifies that the G1GC garbage collector should be used. (The default is -XX: +UseParallelGC.) To understand the frequency and execution time of the garbage collection, use the parameters -verbose:gc -XX: +PrintGCDetails -XX: +PrintGCDateStamps. To initiate garbage collection sooner, set Initiating HeapOccupancyPercent to 35 (the default is 0.45). Doing this helps avoid potential garbage collection for the total memory, which can take a significant amount of time. |
 | Benefits | Better garbage collection as G1 is suItable for large heap to resolve Out of memory issue, reduce the gc pause time, high latency and low throughput |
 | Reference | [Link](https://spark.apache.org/docs/latest/tuning.html) |
 
 | Parameter | spark.driver. maxResultSize |
 | --- | --- |
 | Value | 20G |
-| Explanation | spark.sql. autoBroadcastJoinThreshold \&lt; spark.driver. maxResultSize \&lt; spark.driver.memory |
+| Explanation | spark.sql. autoBroadcast JoinThreshold \&lt; spark.driver. maxResultSize \&lt; spark.driver.memory |
 | Benefits | Resolves error: serialized results of x tasks is bigger than spark.driver. maxResultSize |
 | Reference |   |
 
