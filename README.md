@@ -35,7 +35,7 @@ Note: If EMR cluster is configured to use task nodes, do not exceed CORE Node to
 
 ** **
 
-**Spark submit options:**
+# Spark submit options:
 
 Spark executor memory allocation layout and calculations:
 
@@ -51,9 +51,8 @@ User memory =  ( 1.0 - 0.8 ) \* 34816 = 6963.2
 
 yarn.nodemanager.resource.memory-mb stays around = ~40GB
 
-** **
 
-**Data based spark optimizations:**
+# Data based spark optimizations:
 
 Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB respectively and needs to be joined on particular columns. Following are the ways to optimize the joins and prevent the job failures as the data grows gradually after each refresh.
 
@@ -63,8 +62,12 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 4. To know amount of data processed and time taken by each task, open the stage summary metrics in Application Master:
 5. If 25th percentile takes \&lt;100ms, but MAX time is \&gt; 5 min for task implies that the data is skewed. The data can be evenly distributed by adding salt column:
 
-| import org.apache.spark.sql.functions.\_ df.withColumn(&quot;salt&quot;, (rand \* n).cast(IntegerType)).groupBy(&quot;salt&quot;, groupByFields).agg(aggFields).groupBy(groupByFields).agg(aggFields) |
-| --- |
+    import org.apache.spark.sql.functions.\_ 
+    df.withColumn(&quot;salt&quot;, (rand \* n).cast(IntegerType))
+    .groupBy(&quot;salt&quot;, groupByFields)
+    .agg(aggFields)
+    .groupBy(groupByFields)
+    .agg(aggFields)
 
 1. If the MAX time taken is \&gt; 5 min for a task, try increasing partition size.
 2. If few tasks are taking too long to execute then you are performing cartesian joins due to NULL or repeated values in column used to join.
@@ -73,9 +76,9 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 5. Partition the larger table by column which can evenly distribute the records (like year or quarter) and persist it to EMRFS.
 6. Read each partition at a time by using filter, perform join and write output to EMRFS.
 
-**EMR cluster tuning:**
+# EMR cluster tuning:
 
-**Spark development setup using containers:**
+## Spark development setup using containers:
 
 - Using Docker images: Setting up Kubernetes or Docker for SPARK, HDFS, YARN, Hue, Map-Reduce, HIVE and WebHCat development
 - Using Kubernetes and HELM charts:
