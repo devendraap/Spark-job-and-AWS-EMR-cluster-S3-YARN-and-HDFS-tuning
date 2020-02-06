@@ -126,7 +126,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | 240 |
 | Explanation | Allows task working on skewed data more time for execution. Proper re-partitioning (with salting) on join or groupBy column reduces time for execution |
-| Benefits | Resolves:  Lost executor xx on slave1.cluster: Executor heartbeat timed out after xxxxx msWARN TransportChannelHandler: Exception in connection from /172.31.3.245:46014 |
+| Benefits | Resolves:  Lost executor xx on slave1.cluster: Executor heartbeat timed out after xxxxx msWARN TransportChannel Handler: Exception in connection from /172.31.3.245:46014 |
 | Reference | [Link](https://stackoverflow.com/questions/39347392/how-to-fix-connection-reset-by-peer-message-from-apache-spark) |
 
 | Parameter | spark.network. timeout |
