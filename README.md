@@ -96,16 +96,16 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 
 | Parameter | spark.executor.extraJavaOptions |
 | --- | --- |
-| Value | -XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:OnOutOfMemoryError=&#39;kill -9 %p&#39; |
-| Explanation | The parameter -XX:+UseG1GC specifies that the G1GC garbage collector should be used. (The default is -XX:+UseParallelGC.) To understand the frequency and execution time of the garbage collection, use the parameters -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps. To initiate garbage collection sooner, set InitiatingHeapOccupancyPercent to 35 (the default is 0.45). Doing this helps avoid potential garbage collection for the total memory, which can take a significant amount of time. |
+| Value | -XX:+UseG1GC -XX: InitiatingHeapOccupancyPercent=35 -XX: OnOutOfMemoryError=&#39; kill -9 %p&#39; |
+| Explanation | The parameter -XX:+UseG1GC specifies that the G1GC garbage collector should be used. (The default is -XX: +UseParallelGC.) To understand the frequency and execution time of the garbage collection, use the parameters -verbose:gc -XX: +PrintGCDetails -XX: +PrintGCDateStamps. To initiate garbage collection sooner, set InitiatingHeapOccupancyPercent to 35 (the default is 0.45). Doing this helps avoid potential garbage collection for the total memory, which can take a significant amount of time. |
 | Benefits | Better garbage collection as G1 is suItable for large heap to resolve Out of memory issue, reduce the gc pause time, high latency and low throughput |
 | Reference | [Link](https://spark.apache.org/docs/latest/tuning.html) |
 
 | Parameter | spark.driver. maxResultSize |
 | --- | --- |
 | Value | 20G |
-| Explanation | spark.sql.autoBroadcastJoinThreshold \&lt; spark.driver.maxResultSize \&lt; spark.driver.memory |
-| Benefits | Resolves error: serialized results of x tasks is bigger than spark.driver.maxResultSize |
+| Explanation | spark.sql. autoBroadcastJoinThreshold \&lt; spark.driver. maxResultSize \&lt; spark.driver.memory |
+| Benefits | Resolves error: serialized results of x tasks is bigger than spark.driver. maxResultSize |
 | Reference |   |
 
 | Parameter | spark.yarn. maxAppAttempts |
@@ -119,7 +119,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | 2048 |
 | Explanation | Increases remote procedure call message size |
-| Benefits | Resolves error: exceeds max allowed: spark.rpc.message.maxSize |
+| Benefits | Resolves error: exceeds max allowed: spark.rpc. message.maxSize |
 | Reference |   |
 
 | Parameter | spark.spark. worker.timeout |
@@ -154,14 +154,14 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | 3000 |
 | Explanation |   |
-| Benefits | Resolves error: &quot;org.apache.spark.rpc.RpcTimeoutException: Futures timed out after [120 seconds]&quot; |
+| Benefits | Resolves error: &quot;org.apache. spark.rpc. RpcTimeoutException: Futures timed out after [120 seconds]&quot; |
 | Reference | [Link](https://developer.ibm.com/hadoop/2016/07/18/troubleshooting-and-tuning-spark-for-heavy-workloads/) |
 
 | Parameter | spark.shuffle. io.retryWait |
 | --- | --- |
 | Value | 60s |
 | Explanation |   |
-| Benefits | Resolves error: org.apache.spark.shuffle.MetadataFetchFailedException: Missing an output location for shuffle 1 |
+| Benefits | Resolves error: org.apache. spark.shuffle. MetadataFetchFailedException: Missing an output location for shuffle 1 |
 | Reference |   |
 
 | Parameter | spark.reducer. maxReqsInFlight |
@@ -210,13 +210,13 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | 72000 |
 | Explanation | Timeout in seconds for the broadcast wait time in broadcast joins |
-| Benefits | Resolves error: ERROR yarn.ApplicationMaster: User class threw exception: java.util.concurrent.TimeoutException: Futures timed out after |
+| Benefits | Resolves error: ERROR yarn.ApplicationMaster: User class threw exception: java.util. concurrent.TimeoutException: Futures timed out after |
 | Reference |   |
 
 | Parameter | spark.hadoop. mapreduce.fileoutputcommitter. algorithm.version |
 | --- | --- |
 | Value | 2 |
-| Explanation | Major difference between mapreduce.fileoutputcommitter.algorithm.version=1 and 2 is : Either AM or Reducers will do the mergePaths(). |
+| Explanation | Major difference between mapreduce.fileoutputcommitter. algorithm.version =1 and 2 is : Either AM or Reducers will do the mergePaths(). |
 | Benefits | Allows reducers to do mergePaths() to move those files to the final output directory |
 | Reference | [Link](http://www.openkb.info/2019/04/what-is-difference-between.html) |
 
@@ -231,7 +231,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | zstd |
 | Explanation | Reduces serialized data size by 50% resulting in less spill size (memory and disk), storage io and network io, but increases CPU overhead by 2-5% which is acceptable while processing large datasets |
-| Benefits | Used by spark.sql.inMemoryColumnarStorage.compressed, spark.rdd.compress, spark.shuffle.compress, spark.shuffle.compress, spark.shuffle.spill.compress, spark.checkpoint.compress, spark.broadcast.compress.Which allows us to broadcast table with 2x records, spill less size (memory and data), reduce disk and network io. |
+| Benefits | Used by spark.sql. inMemoryColumnarStorage.compressed, spark.rdd. compress, spark.shuffle. compress, spark.shuffle. compress, spark.shuffle. spill.compress, spark.checkpoint. compress, spark.broadcast. compress. Which allows us to broadcast table with 2x records, spill less size (memory and data), reduce disk and network io. |
 | Reference | [Link](https://docs.aws.amazon.com/redshift/latest/dg/zstd-encoding.html) |
 
 | Parameter | spark.io. compression.zstd. level |
@@ -292,7 +292,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 
 | Parameter | spark.serializer |
 | --- | --- |
-| Value | org.apache.spark.serializer.KryoSerializer |
+| Value | org.apache. spark.serializer. KryoSerializer |
 | Explanation | Better than default spark serializer |
 | Benefits |   |
 | Reference |   |
