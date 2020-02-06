@@ -15,7 +15,7 @@ The Spark job and cluster optimization for processing large dataset are also exp
 
 **Note: Please go through reference links provided to fully understand how spark options affects the data processing**
 
-**Executor resource calculation:**
+# Executor resource calculation:
 
 By assigning 1 core and 1GB for YARN, we are left with 47 core per node.
 
