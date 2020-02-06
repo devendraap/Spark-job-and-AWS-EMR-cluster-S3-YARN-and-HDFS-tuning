@@ -57,7 +57,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Value | 33g |
 | Explanation |   |
 | Benefits |   |
-| Reference | [https://wiki.advisory.com/display/LD/Spark+job+and+AWS+EMR+cluster+%28S3%2C+YARN+and+HDFS%29+tuning#SparkjobandAWSEMRcluster(S3,YARNandHDFS)tuning-Spark-executor-memory-layout](https://wiki.advisory.com/display/LD/Spark+job+and+AWS+EMR+cluster+%28S3%2C+YARN+and+HDFS%29+tuning#SparkjobandAWSEMRcluster(S3,YARNandHDFS)tuning-Spark-executor-memory-layout) |
+| Reference | [Link](https://wiki.advisory.com/display/LD/Spark+job+and+AWS+EMR+cluster+%28S3%2C+YARN+and+HDFS%29+tuning#SparkjobandAWSEMRcluster(S3,YARNandHDFS)tuning-Spark-executor-memory-layout) |
 
 | Parameter | spark.executor.cores |
 | --- | --- |
@@ -85,7 +85,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Value | TRUE |
 | Explanation | To allocate executor dynamically based on yarn.scheduler.capacity.resource-calculator = org.apache.hadoop.yarn.util.resource.DominantResourceCalculator |
 | Benefits | Scales number of executors based on CPU and memory requirements. |
-| Reference | [https://stackoverflow.com/questions/55925106/exceptions-while-running-spark-job-on-emr-cluster-java-io-ioexception-all-data/55925309#55925309](https://stackoverflow.com/questions/55925106/exceptions-while-running-spark-job-on-emr-cluster-java-io-ioexception-all-data/55925309#55925309) |
+| Reference | [Link](https://stackoverflow.com/questions/55925106/exceptions-while-running-spark-job-on-emr-cluster-java-io-ioexception-all-data/55925309#55925309) |
 
 | Parameter | spark.shuffle.service.enabled |
 | --- | --- |
@@ -99,7 +99,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Value | -XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent=35 -XX:OnOutOfMemoryError=&#39;kill -9 %p&#39; |
 | Explanation | The parameter -XX:+UseG1GC specifies that the G1GC garbage collector should be used. (The default is -XX:+UseParallelGC.) To understand the frequency and execution time of the garbage collection, use the parameters -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps. To initiate garbage collection sooner, set InitiatingHeapOccupancyPercent to 35 (the default is 0.45). Doing this helps avoid potential garbage collection for the total memory, which can take a significant amount of time. |
 | Benefits | Better garbage collection as G1 is suItable for large heap to resolve Out of memory issue, reduce the gc pause time, high latency and low throughput |
-| Reference | [https://spark.apache.org/docs/latest/tuning.html](https://spark.apache.org/docs/latest/tuning.html) |
+| Reference | [Link](https://spark.apache.org/docs/latest/tuning.html) |
 
 | Parameter | spark.driver.maxResultSize |
 | --- | --- |
@@ -127,7 +127,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Value | 240 |
 | Explanation | Allows task working on skewed data more time for execution. Proper re-partitioning (with salting) on join or groupBy column reduces time for execution |
 | Benefits | Resolves:  Lost executor xx on slave1.cluster: Executor heartbeat timed out after xxxxx msWARN TransportChannelHandler: Exception in connection from /172.31.3.245:46014 |
-| Reference | [https://stackoverflow.com/questions/39347392/how-to-fix-connection-reset-by-peer-message-from-apache-spark](https://stackoverflow.com/questions/39347392/how-to-fix-connection-reset-by-peer-message-from-apache-spark) |
+| Reference | [Link](https://stackoverflow.com/questions/39347392/how-to-fix-connection-reset-by-peer-message-from-apache-spark) |
 
 | Parameter | spark.network.timeout |
 | --- | --- |
@@ -155,7 +155,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Value | 3000 |
 | Explanation |   |
 | Benefits | Resolves error: &quot;org.apache.spark.rpc.RpcTimeoutException: Futures timed out after [120 seconds]&quot; |
-| Reference | [https://developer.ibm.com/hadoop/2016/07/18/troubleshooting-and-tuning-spark-for-heavy-workloads/](https://developer.ibm.com/hadoop/2016/07/18/troubleshooting-and-tuning-spark-for-heavy-workloads/) |
+| Reference | [Link](https://developer.ibm.com/hadoop/2016/07/18/troubleshooting-and-tuning-spark-for-heavy-workloads/) |
 
 | Parameter | spark.shuffle.io.retryWait |
 | --- | --- |
@@ -218,21 +218,21 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Value | 2 |
 | Explanation | Major difference between mapreduce.fileoutputcommitter.algorithm.version=1 and 2 is : Either AM or Reducers will do the mergePaths(). |
 | Benefits | Allows reducers to do mergePaths() to move those files to the final output directory |
-| Reference | [http://www.openkb.info/2019/04/what-is-difference-between.html](http://www.openkb.info/2019/04/what-is-difference-between.html) |
+| Reference | [Link](http://www.openkb.info/2019/04/what-is-difference-between.html) |
 
 | Parameter | spark.sql.autoBroadcastJoinThreshold |
 | --- | --- |
 | Value | 0 |
 | Explanation | Maximum broadcast table is limited by spark default i.e 8gb |
 | Benefits |   |
-| Reference | [https://github.com/apache/spark/blob/79c66894296840cc4a5bf6c8718ecfd2b08bcca8/sql/core/src/main/scala/org/apache/spark/sql/execution/exchange/BroadcastExchangeExec.scala#L104](https://github.com/apache/spark/blob/79c66894296840cc4a5bf6c8718ecfd2b08bcca8/sql/core/src/main/scala/org/apache/spark/sql/execution/exchange/BroadcastExchangeExec.scala#L104) |
+| Reference | [Link](https://github.com/apache/spark/blob/79c66894296840cc4a5bf6c8718ecfd2b08bcca8/sql/core/src/main/scala/org/apache/spark/sql/execution/exchange/BroadcastExchangeExec.scala#L104) |
 
 | Parameter | spark.io.compression.codec |
 | --- | --- |
 | Value | zstd |
 | Explanation | Reduces serialized data size by 50% resulting in less spill size (memory and disk), storage io and network io, but increases CPU overhead by 2-5% which is acceptable while processing large datasets |
 | Benefits | Used by spark.sql.inMemoryColumnarStorage.compressed, spark.rdd.compress, spark.shuffle.compress, spark.shuffle.compress, spark.shuffle.spill.compress, spark.checkpoint.compress, spark.broadcast.compress.Which allows us to broadcast table with 2x records, spill less size (memory and data), reduce disk and network io. |
-| Reference | [https://docs.aws.amazon.com/redshift/latest/dg/zstd-encoding.html](https://docs.aws.amazon.com/redshift/latest/dg/zstd-encoding.html)[https://facebook.github.io/zstd/](https://docs.aws.amazon.com/redshift/latest/dg/zstd-encoding.html) |
+| Reference | [Link](https://docs.aws.amazon.com/redshift/latest/dg/zstd-encoding.html) |
 
 | Parameter | spark.io.compression.zstd.level |
 | --- | --- |
@@ -505,9 +505,9 @@ $ helm install bitnami/spark
 
 Reference link:
 
-- [https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html](https://www.ibm.com/support/knowledgecenter/en/SSCRJT_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql_TuneS3.html)
-- [https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
-- [https://developer.ibm.com/hadoop/2016/07/18/troubleshooting-and-tuning-spark-for-heavy-workloads/](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
-- [http://www.openkb.info/2019/04/what-is-difference-between.html](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
-- [https://spark.apache.org/docs/latest/tuning.html](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
-- [https://github.com/apache/spark/blob/79c66894296840cc4a5bf6c8718ecfd2b08bcca8/sql/core/src/main/scala/org/apache/spark/sql/execution/exchange/BroadcastExchangeExec.scala#L104](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
+- [Link](https://www.ibm.com/support/knowledgecenter/en/SSCRJT_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql_TuneS3.html)
+- [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
+- [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
+- [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
+- [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
+- [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores)
