@@ -50,6 +50,7 @@ spark.memory.storageFraction (cache, broadcast, accumulator) = 0.4 \* 34816 = 13
 User memory =  ( 1.0 - 0.8 ) \* 34816 = 6963.2
 
 yarn.nodemanager.resource.memory-mb stays around = ~40GB
+
 | Parameter | spark.executor.memory |
 | --- | --- |
 | Value | 33g |
