@@ -94,7 +94,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Benefits | Spark shuffle service service preserves the shuffle files written by executors so the executors can be safely removedResolves error: java.io.IOException: All datanodes are bad.&quot; |
 | Reference |   |
 
-| Parameter | spark.executor.extraJavaOptions |
+| Parameter | spark.executor. extraJavaOptions |
 | --- | --- |
 | Value | -XX:+UseG1GC -XX: InitiatingHeapOccupancy Percent=35 -XX: OnOutOfMemoryError=&#39; kill -9 %p&#39; |
 | Explanation | The parameter -XX:+UseG1GC specifies that the G1GC garbage collector should be used. (The default is -XX: +UseParallelGC.) To understand the frequency and execution time of the garbage collection, use the parameters -verbose:gc -XX: +PrintGCDetails -XX: +PrintGCDateStamps. To initiate garbage collection sooner, set Initiating HeapOccupancyPercent to 35 (the default is 0.45). Doing this helps avoid potential garbage collection for the total memory, which can take a significant amount of time. |
