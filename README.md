@@ -370,6 +370,126 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 
 # EMR cluster tuning:
 
+
+| Configuration Properties | dfs.replication |
+| --- | --- |
+| Classification | hdfs-site |
+| Value | 2 |
+| Usage | HDFS data replication factor for EMR with auto scaling enabled for core nodes |
+| Reference | (blank) |
+
+| Configuration Properties | fs.s3.enableServerSideEncryption |
+| --- | --- |
+| Classification | emrfs-site |
+| Value | TRUE |
+| Usage | Enables S3 AES256 data encryption |
+| Reference | (blank) |
+
+| Configuration Properties | fs.s3a.attempts.maximum |
+| --- | --- |
+| Classification | emrfs-site |
+| Value | 100 |
+| Usage | Workaround to resolve S3&#39;s storage eventual consistency missing file error due to replication in multiple AZ (availability zone) |
+| Reference | (blank) |
+
+| Configuration Properties | fs.s3a.committer.magic.enabled |
+| --- | --- |
+| Classification | emrfs-site |
+| Value | TRUE |
+| Usage | Setting for new Hadoop parquet magic committer |
+| Reference | (blank) |
+
+| Configuration Properties | fs.s3a.connection.maximum |
+| --- | --- |
+| Classification | emrfs-site |
+| Value | 250 |
+| Usage | Increases S3 IO speed |
+| Reference | https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html |
+
+| Configuration Properties | fs.s3a.fast.upload |
+| --- | --- |
+| Classification | emrfs-site |
+| Value | TRUE |
+| Usage | Increases S3 IO speed |
+| Reference | https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html |
+
+| Configuration Properties | fs.s3a.server-side-encryption-algorithm |
+| --- | --- |
+| Classification | core-site |
+| Value | AES256 |
+| Usage | Enables S3 AES256 data encryption |
+| Reference | (blank) |
+
+| Configuration Properties | fs.s3a.threads.core |
+| --- | --- |
+| Classification | emrfs-site |
+| Value | 250 |
+| Usage | Increases S3 IO speed |
+| Reference | https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html |
+
+| Configuration Properties | yarn.log-aggregation.retain-seconds |
+| --- | --- |
+| Classification | yarn-site |
+| Value | -1 |
+| Usage | (blank) |
+| Reference | (blank) |
+
+| Configuration Properties | yarn.log-aggregation-enable |
+| --- | --- |
+| Classification | yarn-site |
+| Value | TRUE |
+| Usage | Aggregates logs at driver node |
+| Reference | (blank) |
+
+| Configuration Properties | yarn.nm.liveness-monitor.expiry-interval-ms |
+| --- | --- |
+| Classification | yarn-site |
+| Value | 360000 |
+| Usage | Increases time to wait until a node manager is considered dead |
+| Reference | (blank) |
+
+| Configuration Properties | yarn.nodemanager.pmem-check-enabled |
+| --- | --- |
+| Classification | yarn-site |
+| Value | FALSE |
+| Usage | (Note: Re-partition data in job based on size) |
+| Reference | (blank) |
+
+| Configuration Properties | yarn.nodemanager.vmem-check-enabled |
+| --- | --- |
+| Classification | yarn-site |
+| Value | FALSE |
+| Usage | To disable hard memory restriction causing OOM (out of memory) JVM error |
+| Reference | (blank) |
+
+| Configuration Properties | yarn.resourcemanager.decommissioning.timeout |
+| --- | --- |
+| Classification | yarn-site |
+| Value | 3600 |
+| Usage | Increases timeout interval to blacklist node |
+| Reference | (blank) |
+
+| Configuration Properties | yarn.scheduler.capacity.resource-calculator |
+| --- | --- |
+| Classification | capacity-scheduler |
+| Value | org.apache.hadoop.yarn.util.resource.DominantResourceCalculator |
+| Usage | The default resource calculator i.e org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator uses only memory information for allocating containers and CPU scheduling is not enabled by default |
+| Reference | https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores |
+
+| Configuration Properties | yarn.scheduler.capacity.root.default.capacity |
+| --- | --- |
+| Classification | capacity-scheduler |
+| Value | 100 |
+| Usage | Uses all resources of dedicated cluster |
+| Reference | (blank) |
+
+| Configuration Properties | yarn.scheduler.capacity.root.default.maximum-capacity |
+| --- | --- |
+| Classification | capacity-scheduler |
+| Value | 100 |
+| Usage | Uses all resources of dedicated cluster |
+| Reference | (blank) |
+
 ## Spark development setup using containers:
 
 - Using Docker images: Setting up Kubernetes or Docker for SPARK, HDFS, YARN, Hue, Map-Reduce, HIVE and WebHCat development
