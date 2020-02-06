@@ -69,7 +69,7 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
     .groupBy(groupByFields)
     .agg(aggFields)
 
-1. If the MAX time taken is \&gt; 5 min for a task, try increasing partition size.
+1. If the MAX time taken is greater than 5 min for a task, try increasing partition size.
 2. If few tasks are taking too long to execute then you are performing cartesian joins due to NULL or repeated values in column used to join.
 3. If data processed in only few ETL steps is too large try following options:
 4. Turn on auto-scaling option of cluster to allocate more core nodes while processing those few large data processing ETL steps.
