@@ -161,7 +161,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | 60s |
 | Explanation |   |
-| Benefits | Resolves error: org.apache. spark.shuffle. MetadataFetchFailedException: Missing an output location for shuffle 1 |
+| Benefits | Resolves error: org.apache. spark.shuffle. MetadataFetch FailedException: Missing an output location for shuffle 1 |
 | Reference |   |
 
 | Parameter | spark.reducer. maxReqsInFlight |
@@ -178,7 +178,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Benefits |   |
 | Reference |   |
 
-| Parameter | spark.scheduler. maxRegisteredResourcesWaitingTime |
+| Parameter | spark.scheduler. maxRegistered ResourcesWaitingTime |
 | --- | --- |
 | Value | 180s |
 | Explanation | The maximum amount of time it will wait before scheduling begins is controlled |
@@ -210,17 +210,17 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | 72000 |
 | Explanation | Timeout in seconds for the broadcast wait time in broadcast joins |
-| Benefits | Resolves error: ERROR yarn.ApplicationMaster: User class threw exception: java.util. concurrent.TimeoutException: Futures timed out after |
+| Benefits | Resolves error: ERROR yarn.ApplicationMaster: User class threw exception: java.util. concurrent. TimeoutException: Futures timed out after |
 | Reference |   |
 
-| Parameter | spark.hadoop. mapreduce.fileoutputcommitter. algorithm.version |
+| Parameter | spark.hadoop. mapreduce. fileoutputcommitter. algorithm.version |
 | --- | --- |
 | Value | 2 |
-| Explanation | Major difference between mapreduce.fileoutputcommitter. algorithm.version =1 and 2 is : Either AM or Reducers will do the mergePaths(). |
+| Explanation | Major difference between mapreduce. fileoutputcommitter. algorithm.version =1 and 2 is : Either AM or Reducers will do the mergePaths(). |
 | Benefits | Allows reducers to do mergePaths() to move those files to the final output directory |
 | Reference | [Link](http://www.openkb.info/2019/04/what-is-difference-between.html) |
 
-| Parameter | spark.sql. autoBroadcastJoinThreshold |
+| Parameter | spark.sql. autoBroadcast JoinThreshold |
 | --- | --- |
 | Value | 0 |
 | Explanation | Maximum broadcast table is limited by spark default i.e 8gb |
@@ -231,7 +231,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | --- | --- |
 | Value | zstd |
 | Explanation | Reduces serialized data size by 50% resulting in less spill size (memory and disk), storage io and network io, but increases CPU overhead by 2-5% which is acceptable while processing large datasets |
-| Benefits | Used by spark.sql. inMemoryColumnarStorage.compressed, spark.rdd. compress, spark.shuffle. compress, spark.shuffle. compress, spark.shuffle. spill.compress, spark.checkpoint. compress, spark.broadcast. compress. Which allows us to broadcast table with 2x records, spill less size (memory and data), reduce disk and network io. |
+| Benefits | Used by spark.sql. inMemoryColumnarStorage. compressed, spark.rdd. compress, spark.shuffle. compress, spark.shuffle. compress, spark.shuffle. spill.compress, spark.checkpoint. compress, spark.broadcast. compress. Which allows us to broadcast table with 2x records, spill less size (memory and data), reduce disk and network io. |
 | Reference | [Link](https://docs.aws.amazon.com/redshift/latest/dg/zstd-encoding.html) |
 
 | Parameter | spark.io. compression.zstd. level |
@@ -244,7 +244,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Parameter | spark.sql. inMemoryColumnarStorage. compressed |
 | --- | --- |
 | Value | TRUE |
-| Explanation | Enables compression. Reduce network IO and memory usage using spark compression codec spark.io.compression.codec |
+| Explanation | Enables compression. Reduce network IO and memory usage using spark compression codec spark.io. compression.codec |
 | Benefits |   |
 | Reference |   |
 
@@ -325,7 +325,7 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Benefits | Resolves error: com.esotericsoftware. kryo.KryoException: Buffer overflow. Available: 0, required: 57197 |
 | Reference |   |
 
-| Parameter | spark.sql.shuffle.partitions |
+| Parameter | spark.sql.shuffle. partitions |
 | --- | --- |
 | Value | 10000 |
 | Explanation | Number of partitions during join operation |
@@ -342,13 +342,13 @@ yarn.nodemanager.resource.memory-mb stays around = ~40GB
 | Parameter | spark.scheduler. listenerbus.eventqueue. capacity |
 | --- | --- |
 | Value | 20000 |
-| Explanation | Resolves error: ERROR scheduler.LiveListenerBus: Dropping SparkListenerEvent because no remaining room in event queue. This likely means one of the SparkListeners is too slow and cannot keep up with the rate at which tasks are being started by the scheduler |
+| Explanation | Resolves error: ERROR scheduler. LiveListenerBus: Dropping SparkListenerEvent because no remaining room in event queue. This likely means one of the SparkListeners is too slow and cannot keep up with the rate at which tasks are being started by the scheduler |
 
 # Data based spark optimizations:
 
 Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB respectively and needs to be joined on particular columns. Following are the ways to optimize the joins and prevent the job failures as the data grows gradually after each refresh.
 
-1. Set spark.sql.files.maxPartitionBytes to 128MB which will reparation the files after reading so that resultant partitions will be each of 128MB.
+1. Set spark.sql. files.maxPartitionBytes to 128MB which will reparation the files after reading so that resultant partitions will be each of 128MB.
 2. If fill rate of joining column is not 100%, filter records containing null and perform join on those records. Union the output with records containing null values.
 3. Set spark.shuffle.paritions value to re-partition data and increase tasks during join operation resulting in increased parallel processing.  The partition size should be ~128MB corresponding to the block size in EMRFS (ref. AWS docs).
 4. To know amount of data processed and time taken by each task, open the stage summary metrics in Application Master:
@@ -378,40 +378,40 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | Usage | HDFS data replication factor for EMR with auto scaling enabled for core nodes |
 | Reference | (blank) |
 
-| Configuration Properties | fs.s3.enableServerSideEncryption |
+| Configuration Properties | fs.s3.enableServer SideEncryption |
 | --- | --- |
 | Classification | emrfs-site |
 | Value | TRUE |
 | Usage | Enables S3 AES256 data encryption |
 | Reference | (blank) |
 
-| Configuration Properties | fs.s3a.attempts.maximum |
+| Configuration Properties | fs.s3a. attempts.maximum |
 | --- | --- |
 | Classification | emrfs-site |
 | Value | 100 |
 | Usage | Workaround to resolve S3&#39;s storage eventual consistency missing file error due to replication in multiple AZ (availability zone) |
 | Reference | (blank) |
 
-| Configuration Properties | fs.s3a.committer.magic.enabled |
+| Configuration Properties | fs.s3a.committer. magic.enabled |
 | --- | --- |
 | Classification | emrfs-site |
 | Value | TRUE |
 | Usage | Setting for new Hadoop parquet magic committer |
 | Reference | (blank) |
 
-| Configuration Properties | fs.s3a.connection.maximum |
+| Configuration Properties | fs.s3a.connection. maximum |
 | --- | --- |
 | Classification | emrfs-site |
 | Value | 250 |
 | Usage | Increases S3 IO speed |
-| Reference | https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html |
+| Reference | [Link](https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html) |
 
-| Configuration Properties | fs.s3a.fast.upload |
+| Configuration Properties | fs.s3a.fast. upload |
 | --- | --- |
 | Classification | emrfs-site |
 | Value | TRUE |
 | Usage | Increases S3 IO speed |
-| Reference | https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html |
+| Reference | [Link] (https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html) |
 
 | Configuration Properties | fs.s3a.server-side-encryption-algorithm |
 | --- | --- |
@@ -425,7 +425,7 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | Classification | emrfs-site |
 | Value | 250 |
 | Usage | Increases S3 IO speed |
-| Reference | https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html |
+| Reference | [Link](https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html) |
 
 | Configuration Properties | yarn.log-aggregation.retain-seconds |
 | --- | --- |
@@ -474,7 +474,7 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | Classification | capacity-scheduler |
 | Value | org.apache.hadoop.yarn.util.resource.DominantResourceCalculator |
 | Usage | The default resource calculator i.e org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator uses only memory information for allocating containers and CPU scheduling is not enabled by default |
-| Reference | https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores |
+| Reference | [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores) |
 
 | Configuration Properties | yarn.scheduler.capacity.root.default.capacity |
 | --- | --- |
