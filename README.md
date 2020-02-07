@@ -473,7 +473,7 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | --- | --- |
 | Classification | capacity-scheduler |
 | Value | org.apache.hadoop. yarn.util.resource. DominantResourceCalculator |
-| Usage | The default resource calculator i.e org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator uses only memory information for allocating containers and CPU scheduling is not enabled by default |
+| Usage | The default resource calculator i.e org.apache. hadoop.yarn. util.resource. DefaultResourceCalculator uses only memory information for allocating containers and CPU scheduling is not enabled by default |
 | Reference | [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores) |
 
 | Configuration Properties | yarn.scheduler. capacity.root. default.capacity |
