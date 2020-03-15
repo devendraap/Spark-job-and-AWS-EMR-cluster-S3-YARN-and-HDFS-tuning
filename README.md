@@ -354,7 +354,7 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 4. To know amount of data processed and time taken by each task, open the stage summary metrics in Application Master:
 5. If 25th percentile takes \&lt;100ms, but MAX time is \&gt; 5 min for task implies that the data is skewed. The data can be evenly distributed by adding salt column:
 
-    import org.apache.spark.sql.functions.\_ 
+    import org.apache. spark.sql.functions.\_ 
     df.withColumn(&quot;salt&quot;, (rand \* n).cast(IntegerType))
     .groupBy(&quot;salt&quot;, groupByFields)
     .agg(aggFields)
@@ -411,7 +411,7 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | Classification | emrfs-site |
 | Value | TRUE |
 | Usage | Increases S3 IO speed |
-| Reference | [Link] (https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html) |
+| Reference | [Link](https://www.ibm.com/support/knowledgecenter/en/SSCRJT\_5.0.4/com.ibm.swg.im.bigsql.doc/doc/bigsql\_TuneS3.html) |
 
 | Configuration Properties | fs.s3a.server-side-encryption-algorithm |
 | --- | --- |
@@ -473,7 +473,7 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | --- | --- |
 | Classification | capacity-scheduler |
 | Value | org.apache.hadoop. yarn.util.resource. DominantResourceCalculator |
-| Usage | The default resource calculator i.e org.apache. hadoop.yarn. util.resource. DefaultResourceCalculator uses only memory information for allocating containers and CPU scheduling is not enabled by default |
+| Usage | The default resource calculator i.e org.apache. hadoop.yarn. util.resource. DefaultResource Calculator uses only memory information for allocating containers and CPU scheduling is not enabled by default |
 | Reference | [Link](https://stackoverflow.com/questions/29964792/apache-hadoop-yarn-underutilization-of-cores) |
 
 | Configuration Properties | yarn.scheduler. capacity.root. default.capacity |
