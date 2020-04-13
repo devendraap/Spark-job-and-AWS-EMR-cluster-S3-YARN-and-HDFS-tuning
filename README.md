@@ -490,6 +490,72 @@ Let&#39;s assume we have two tables whose raw/csv file size is 3TB and 500GB res
 | Usage | Uses all resources of dedicated cluster |
 | Reference | (blank) |
 
+## Spark Option summary
+If data size is range of GB i.e Millions of records. 
+```
+    /usr/lib/spark/bin/spark-submit 
+    --conf deploy-mode=cluster
+    --conf driver-memory=30G
+    --conf executor-memory=34G
+    --conf executor-cores=5
+```
+
+If data size is range of TB i.e Billions of records. 
+Note: Not tested above 15 Billion records or above 15TB
+```
+--conf \"spark.executor.extraJavaOptions=-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -XX:OnOutOfMemoryError='kill -9 %p'\"
+    --conf spark.executor.memoryOverhead=3g 
+    --conf spark.sql.files.maxPartitionBytes=134217728 
+    --conf spark.yarn.maxAppAttempts=1 
+    --conf spark.driver.maxResultSize=0 
+    --conf spark.rpc.message.maxSize=2047 
+    --conf spark.network.timeout=10000000s 
+    --conf spark.executor.heartbeatInterval=10000000 
+    --conf spark.authenticate=true 
+    --conf spark.files.FetchTimeout=600s 
+    --conf spark.shuffle.file.buffer=1024k 
+    --conf spark.locality.wait=15s 
+    --conf spark.shuffle.io.connectionTimeout=3000 
+    --conf spark.shuffle.io.retryWait=60s 
+    --conf spark.shuffle.io.maxRetries=10 
+    --conf spark.reducer.maxReqsInFlight=1 
+    --conf spark.scheduler.maxRegisteredResourcesWaitingTime=60s 
+    --conf spark.dynamicAllocation.enabled=true 
+    --conf spark.dynamicAllocation.executorIdleTimeout=60s 
+    --conf spark.dynamicAllocation.cachedExecutorIdleTimeout=36000s 
+    --conf spark.sql.broadcastTimeout=720000 
+    --conf spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem 
+    --conf spark.speculation=false 
+    --conf spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version=1 
+    --conf spark.sql.inMemoryColumnarStorage.compressed=true 
+    --conf spark.sql.autoBroadcastJoinThreshold=0 
+    --conf spark.sql.parquet.fs.optimized.committer.optimization-enabled=true 
+    --conf spark.sql.parquet.output.committer.class=com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter 
+    --conf spark.sql.sources.commitProtocolClass=org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol 
+    --conf spark.sql.hive.convertMetastoreParquet=true 
+    --conf spark.rdd.compress=true 
+    --conf spark.shuffle.compress=true 
+    --conf spark.shuffle.spill.compress=true 
+    --conf spark.checkpoint.compress=true 
+    --conf spark.broadcast.compress=true 
+    --conf yarn.nodemanager.vmem-check-enabled=false 
+    --conf yarn.nodemanager.pmem-check-enabled=false 
+    --conf spark.sql.parquet.writeLegacyFormat=false 
+    --conf spark.memory.fraction=0.80 
+    --conf spark.memory.storageFraction=0.50 
+    --conf spark.storage.level=MEMORY_AND_DISK_SER 
+    --conf spark.serializer=org.apache.spark.serializer.KryoSerializer 
+    --conf spark.hadoop.s3.multipart.committer.conflict-mode=replace 
+    --conf spark.shuffle.consolidateFiles=true 
+    --conf spark.reducer.maxSizeInFlight=96 
+    --conf spark.kryoserializer.buffer.max=1024m 
+    --conf spark.sql.shuffle.partitions=10000 
+    --conf spark.spark.worker.timeout=240 
+    --conf spark.sql.inMemoryColumnarStorage.compressed=true 
+    --conf spark.ui.showConsoleProgress=true 
+    --conf spark.scheduler.listenerbus.eventqueue.capacity=20000
+```
+
 ## Spark development setup using containers:
 
 - Using Docker images: Setting up Kubernetes or Docker for SPARK, HDFS, YARN, Hue, Map-Reduce, HIVE and WebHCat development
